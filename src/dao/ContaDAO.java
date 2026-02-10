@@ -13,8 +13,11 @@ public class ContaDAO {
 	}
 
 	private void criarTabelaConta() {
-		String sql = "CREATE TABLE IF NOT EXISTS contas (" + "id_conta INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ "numero_conta TEXT UNIQUE NOT NULL," + "agencia TEXT," + "saldo DECIMAL," + "tipo_conta TEXT);";
+		String sql = "CREATE TABLE IF NOT EXISTS contas ("
+				+ "id_conta INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ "numero_conta TEXT UNIQUE NOT NULL," + "agencia TEXT," + "saldo DECIMAL,"
+				+ "tipo_conta TEXT, dataAbertura TEXT, id_cliente INTEGER NOT NULL,"
+				+ "FOREIGN KEY (id_cliente) REFERENCES clietes(id_cliente);";
 
 		try (Connection conexao = ConexaoSqlite.conectar(); Statement stm = conexao.createStatement()) {
 			stm.execute(sql);

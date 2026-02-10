@@ -58,6 +58,10 @@ public class Cliente {
 		return dataCadastro;
 	}
 	
+	public String toString() {
+		return this.getNome() + "\n" + this.email;
+	}
+	
 	
 	
 	

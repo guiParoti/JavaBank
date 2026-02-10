@@ -1,4 +1,4 @@
-package aplicacao;
+package interfaces;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class MenuInicial {
 				+ "2- Criar conta\n"
 				+ "3- Sair\n"
 				+ "R: ");
-			String opcaoInicio = SCANNER.nextLine();		
+			String opcaoInicio = SCANNER.nextLine();	
 			
 			try {
 				int opcaoInicioInt = Integer.parseInt(opcaoInicio);
@@ -22,11 +22,13 @@ public class MenuInicial {
 				switch(opcaoInicioInt) {
 				
 				case 1:
+					MenuLogin login = new  MenuLogin();
+					login.verificarLogin();
 					break;
 				
 				case 2:
-					MenuCriarConta criarConta = new MenuCriarConta();
-					criarConta.cadastro();
+					MenuCriarCadastro criar = new MenuCriarCadastro();
+					criar.cadastro();
 					break;
 				
 				case 3:

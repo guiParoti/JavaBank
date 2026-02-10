@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -45,6 +46,31 @@ public class ClienteDAO {
 			System.out.println("Erro ao criar conta!");
 			e.printStackTrace();
 		}
+	}
+
+	public Cliente verificarLogin(String cpf, String senha) {
+		String sql = "SELECT * FROM clientes WHERE cpf = ? AND senha = ?";
+		Cliente cliente = null;
+
+		try (Connection conexao = ConexaoSqlite.conectar(); PreparedStatement ps = conexao.prepareStatement(sql)) {
+
+			ps.setString(1, cpf);
+			ps.setString(2, senha);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				cliente = new Cliente(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"),
+						rs.getString("senha"));
+			}
+			;
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao verificar informações!");
+			e.printStackTrace();
+		}
+
+		return cliente;
+
 	}
 
 }

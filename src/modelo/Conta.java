@@ -1,5 +1,7 @@
 package modelo;
 
+import java.time.LocalDate;
+
 public class Conta {
 	
 	private int id;
@@ -7,6 +9,7 @@ public class Conta {
 	private String agencia;
 	private double saldo;
 	private String tipoConta;
+	private LocalDate dataAbertura;
 	
 	
 	
@@ -15,6 +18,7 @@ public class Conta {
 		this.agencia = agencia;
 		this.saldo = saldo;
 		this.tipoConta = tipoConta;
+		this.dataAbertura = LocalDate.now();
 	}
 	
 	
@@ -50,9 +54,11 @@ public class Conta {
 	public String getTipoConta() {
 		return tipoConta;
 	}
-	
-	
-	
+
+
+	public LocalDate getDataAbertura() {
+		return dataAbertura;
+	}
 	
 
 }
