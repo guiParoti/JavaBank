@@ -1,0 +1,10 @@
+package aplicacao;
+
+public class App {
+	
+	public static void main(String[] args) {
+		
+		new MenuInicial();
+	}
+
+}
