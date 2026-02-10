@@ -9,7 +9,7 @@ public class Cliente {
 	private String cpf;
 	private String email;
 	private String senha;
-	private LocalDate dataCadastro;
+	private String dataCadastro;
 	
 	
 	public Cliente(String nome, String cpf, String email, String senha) {
@@ -17,15 +17,16 @@ public class Cliente {
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
-		this.dataCadastro = LocalDate.now();
+		this.dataCadastro = LocalDate.now().toString();
 	}
 	
-	public Cliente(int id, String nome, String cpf, String email, String senha) {
+	public Cliente(int id, String nome, String cpf, String email, String senha, String dataCadastro) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
+		this.dataCadastro = dataCadastro;
 	}
 
 
@@ -54,12 +55,14 @@ public class Cliente {
 	}
 
 
-	public LocalDate getDataCadastro() {
+	public String getDataCadastro() {
 		return dataCadastro;
 	}
 	
+	@Override
 	public String toString() {
-		return this.getNome() + "\n" + this.email;
+		return this.getNome() + "\n" + this.cpf +
+				"\nCadastro: " + this.dataCadastro;
 	}
 	
 	

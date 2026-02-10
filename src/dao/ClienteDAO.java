@@ -59,8 +59,8 @@ public class ClienteDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				cliente = new Cliente(rs.getString("nome"), rs.getString("cpf"), rs.getString("email"),
-						rs.getString("senha"));
+				cliente = new Cliente(rs.getInt("id_cliente"), rs.getString("nome"), rs.getString("cpf"), 
+						rs.getString("email"), rs.getString("senha"), rs.getString("data_cadastro"));
 			}
 			;
 
@@ -71,6 +71,31 @@ public class ClienteDAO {
 
 		return cliente;
 
+	}
+	
+	public Cliente minhasInformacoes(int id) {
+		Cliente cliente = null;
+		
+		String sql = "SELECT * FROM clientes WHERE id_cliente = ?";
+		
+		try(Connection conexao = ConexaoSqlite.conectar(); 
+				PreparedStatement stm = conexao.prepareStatement(sql)) {
+			
+			stm.setInt(1, id);
+			ResultSet rs = stm.executeQuery();
+			
+			if(rs.next()) {
+				cliente = new Cliente(rs.getInt("id_cliente"), rs.getString("nome"), rs.getString("cpf"), 
+						rs.getString("email"), rs.getString("senha"), rs.getString("data_cadastro"));
+
+			};
+
+		}catch (SQLException e) {
+			System.out.println("Erro ao carregar informações do cliente!");
+			e.printStackTrace();
+		}
+		
+		return cliente;
 	}
 
 }

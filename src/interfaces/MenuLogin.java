@@ -22,7 +22,8 @@ public class MenuLogin {
 		Cliente cliente = tabela.verificarLogin(cpf, senha);
 		
 		if(cliente != null) {
-			System.out.println("Seja bem-vindo " + cliente.getNome() + "!");
+			MenuPrincipal menuPrincipal = new MenuPrincipal(cliente);
+			menuPrincipal.exibirMenuPrincipal();
 		}else {
 			System.out.println("CPF ou senha inválidos!");
 		}
