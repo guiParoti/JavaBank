@@ -6,28 +6,30 @@ public class Conta {
 	
 	private int id;
 	private String numeroConta;
-	private String agencia;
+	private String agencia = "0001";
 	private double saldo;
 	private String tipoConta;
-	private LocalDate dataAbertura;
+	private String dataAbertura;
+	private int idCliente;
 	
 	
 	
-	public Conta(String numeroConta, String agencia, double saldo, String tipoConta) {
+	public Conta(String agencia, String numeroConta, double saldo, String tipoConta, int idCliente) {
 		this.numeroConta = numeroConta;
-		this.agencia = agencia;
 		this.saldo = saldo;
 		this.tipoConta = tipoConta;
-		this.dataAbertura = LocalDate.now();
+		this.dataAbertura = LocalDate.now().toString();
+		this.idCliente = idCliente;
 	}
 	
 	
-	public Conta(int id, String numeroConta, String agencia, double saldo, String tipoConta) {
+	public Conta(int id, String agencia, String numeroConta, double saldo, String tipoConta, String dataAbertura, int idCliente) {
 		this.id = id;
 		this.numeroConta = numeroConta;
-		this.agencia = agencia;
 		this.saldo = saldo;
 		this.tipoConta = tipoConta;
+		this.dataAbertura = dataAbertura;
+		this.idCliente = idCliente;
 	}
 
 
@@ -56,9 +58,22 @@ public class Conta {
 	}
 
 
-	public LocalDate getDataAbertura() {
+	public String getDataAbertura() {
 		return dataAbertura;
 	}
+
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+	
+	public String toString() {
+		return "Agencia: " + this.agencia + 
+				"\nNúmero da conta: " + this.numeroConta + 
+				"\nTipo de conta: " + this.tipoConta + "\nConta aberta em: " + this.getDataAbertura();
+	}
+	
+	
 	
 
 }

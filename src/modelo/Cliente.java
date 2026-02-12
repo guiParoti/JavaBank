@@ -61,8 +61,8 @@ public class Cliente {
 	
 	@Override
 	public String toString() {
-		return this.getNome() + "\n" + this.cpf +
-				"\nCadastro: " + this.dataCadastro;
+		return "CPF: " + this.cpf + "\nNome: " + this.nome +
+				"\nEmail: " + this.email + "\nCadastro: " + this.dataCadastro;
 	}
 	
 	
