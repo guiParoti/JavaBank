@@ -80,7 +80,6 @@ Clone o repositório:
 
 git clone : https://github.com/guiParoti/JavaBank.git
 
-
 Abra o projeto em sua IDE (Eclipse, IntelliJ, VS Code)
 
 Execute a classe principal do sistema
@@ -99,20 +98,3 @@ Implementação de regras de negócio
 
 Organização e refatoração de código
 
-🔮 Melhorias Futuras
-
-Implementação de camada Service
-
-Uso de Enum para tipo de transação
-
-Transferência entre contas
-
-Controle transacional (commit/rollback)
-
-Interface gráfica ou API REST
-
-Testes automatizados
-
-📌 Autor
-
-Desenvolvido como projeto de estudo para evolução em desenvolvimento Java back-end.
