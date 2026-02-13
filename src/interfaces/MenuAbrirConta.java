@@ -7,6 +7,12 @@ import dao.ContaDAO;
 import modelo.Cliente;
 import modelo.Conta;
 
+/*
+ * Menu de abrir conta. 
+ * Responsável pela interface de abertura de conta, nesse menu é possível escolher o tipo de conta que deseja abrir.
+ * Os tipos são conta corrente ou conta poupança.
+ */
+
 public class MenuAbrirConta {
 
 	private Scanner entrada = MenuInicial.SCANNER;
@@ -41,7 +47,7 @@ public class MenuAbrirConta {
 
 				System.out.print("Você selecionou conta " + tipo + ", tem certeza?\n1- Sim\n2- Não\n" + "R: ");
 				String confirmacao = entrada.nextLine();
-				String numeroConta = UUID.randomUUID().toString().substring(0, 8);
+				String numeroConta = UUID.randomUUID().toString().substring(0, 8); // Isso é temporario, internamente depois ele formata o número da conta. 
 
 				if (confirmacao.equals("1")) {
 					Conta conta = new Conta("0001", numeroConta, 0.0, tipo, cliente.getId());

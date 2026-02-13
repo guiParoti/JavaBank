@@ -2,6 +2,12 @@ package interfaces;
 
 import java.util.Scanner;
 
+/*
+ * Menu inicial.
+ * Responsavel pela interface inicial ao rodar a aplicação.
+ * Aqui é possivel ir para o login se já for cliente do banco ou criar um cadastro se não for um cliente.
+ */
+
 public class MenuInicial {
 
 	public static final Scanner SCANNER = new Scanner(System.in);
@@ -10,7 +16,7 @@ public class MenuInicial {
 
 		while (true) {
 			System.out.println("----------SEJA BEM-VINDO AO JAVABANK----------");
-			System.out.print("1- Já sou cliente\n" + "2- Criar conta\n" + "0- Sair\n" + "R: ");
+			System.out.print("1- Já sou cliente\n" + "2- Criar cadastro\n" + "0- Sair\n" + "R: ");
 			String opcaoInicio = SCANNER.nextLine();
 
 			try {

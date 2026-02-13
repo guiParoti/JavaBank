@@ -5,6 +5,12 @@ import java.util.Scanner;
 import dao.ClienteDAO;
 import modelo.Cliente;
 
+/*
+ * Menu de Cadastro.
+ * Responsavel pela interface de cadastro do cliente no banco, aqui você insere seus dados, como nome, cpf, email e senha.
+ * Sendo seu cpf e senha utilizados para logar.
+ */
+
 public class MenuCriarCadastro {
 
 	private Scanner entrada = MenuInicial.SCANNER;

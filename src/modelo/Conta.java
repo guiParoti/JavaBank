@@ -47,6 +47,9 @@ public class Conta {
 		return agencia;
 	}
 
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
 
 	public double getSaldo() {
 		return saldo;

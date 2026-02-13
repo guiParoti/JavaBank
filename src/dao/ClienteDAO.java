@@ -9,6 +9,11 @@ import java.sql.Statement;
 import bancoDados.ConexaoSqlite;
 import modelo.Cliente;
 
+/*
+ * DAO da parte do cliente, responsavel por criar a tabela de clientes e salvar os dados de cadastro do cliente.
+ * Juntamente tambem contém os metodos de ler os dados do cliente e vereficar os dados do cliente para login.
+ */
+
 public class ClienteDAO {
 
 	public ClienteDAO() {

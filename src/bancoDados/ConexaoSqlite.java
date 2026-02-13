@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/*
+ * Classe responsavel pela conexão com o SQLite
+ */
+
 public class ConexaoSqlite {
 
 	private static final String URL = "jdbc:sqlite:dados.db";
