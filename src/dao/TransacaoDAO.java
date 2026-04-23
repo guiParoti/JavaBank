@@ -28,6 +28,7 @@ public class TransacaoDAO {
 				+ "tipo TEXT NOT NULL,"
 				+ "valor REAL NOT NULL,"
 				+ "data TEXT NOT NULL,"
+				+ "horario TEXT NOT NULL,"
 				+ "id_conta INTEGER NOT NULL,"
 				+ "FOREIGN KEY (id_conta) REFERENCES contas(id_conta));";
 		
@@ -41,8 +42,8 @@ public class TransacaoDAO {
 	}
 	
 	public void salvarTransacao(Transacao transacao) {
-		String sql = "INSERT INTO transacoes (tipo, valor, data, id_conta) "
-				+ "VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO transacoes (tipo, valor, data, horario, id_conta) "
+				+ "VALUES (?, ?, ?, ?, ?)";
 		
 		try (Connection conexao = ConexaoSqlite.conectar();
 				PreparedStatement ps = conexao.prepareStatement(sql)) {
@@ -50,7 +51,8 @@ public class TransacaoDAO {
 			ps.setString(1, transacao.getTipo());
 			ps.setDouble(2, transacao.getValor());
 			ps.setString(3, transacao.getData());
-			ps.setInt(4, transacao.getIdConta());
+			ps.setString(4, transacao.getHorarioTransacao());
+			ps.setInt(5, transacao.getIdConta());
 			
 			ps.executeUpdate();
 		}
@@ -73,7 +75,7 @@ public class TransacaoDAO {
 
 			while (rs.next()) {
 				Transacao transacao = new Transacao(rs.getInt("id_transacao"),
-						rs.getString("tipo"), rs.getDouble("valor"), rs.getString("data"), rs.getInt("id_conta"));
+						rs.getString("tipo"), rs.getDouble("valor"), rs.getString("data"), rs.getString("horario"), rs.getInt("id_conta"));
 				listaDeTransacoes.add(transacao);
 			};
 

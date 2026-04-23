@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,15 +31,20 @@ public class MenuPrincipal {
 	public MenuPrincipal(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	// CPF 36415114530
+	// guilhermeparoti57@gmail.com
+	// guisenhafalsa1234
 
 	public void exibirMenuPrincipal() {
-		System.out.println("--------------------------------");
+		linhas();
 		System.out.println("Seja bem-vindo " + cliente.getNome() + "!");
+		linhas();
 
 		while (true) {
 
-			System.out.print("1- Abrir conta\n" + "2- Ver informações da conta\n" + "3- Ver extrato" + "\n4- Ver saldo\n"
-					+ "5- Depositar\n" + "6- Sacar\n" + "0- Sair\n" + "R: ");
+			System.out.print("1- Abrir conta\n" + "2- Ver informações da conta\n" + "3- Ver extrato"
+					+ "\n4- Ver saldo\n" + "5- Depositar\n" + "6- Sacar\n" + "0- Sair\n" + "R: ");
 			String opcaoMenuPrincipal = entrada.nextLine();
 
 			try {
@@ -47,8 +53,12 @@ public class MenuPrincipal {
 				switch (opcaoMenuPrincipalInt) {
 
 				case 1:
-					MenuAbrirConta menuAbrirconta = new MenuAbrirConta(cliente);
-					menuAbrirconta.abrirConta();
+					if (verificarContaExistente(1) == false) {
+						System.out.println("Você já possui uma conta aberta!");
+					} else {
+						MenuAbrirConta menuAbrirconta = new MenuAbrirConta(cliente);
+						menuAbrirconta.abrirConta();
+					}
 					break;
 				case 2:
 					carregarInformacoesConta();
@@ -67,7 +77,7 @@ public class MenuPrincipal {
 					break;
 				case 0:
 					System.out.println("Encerrando sessão!");
-					return;
+					new MenuInicial();
 				default:
 					System.out.println("Insira um número de 0 a 6!");
 					continue;
@@ -77,13 +87,13 @@ public class MenuPrincipal {
 				System.out.println("Insira uma opção válida!");
 				continue;
 			}
-			System.out.println("--------------------------------");
+			linhas();
 		}
 	}
 
 	public void carregarInformacoesCadastro() {
 		cliente = clienteDados.minhasInformacoes(cliente.getId());
-		System.out.println("--------------------------------");
+		linhas();
 		if (cliente != null) {
 			System.out.println(cliente);
 		} else {
@@ -92,31 +102,32 @@ public class MenuPrincipal {
 	}
 
 	public void carregarInformacoesConta() {
-		System.out.println("--------------------------------");
-		if (verificarContaExistente()) {
+		linhas();
+		if (verificarContaExistente(2)) {
 			System.out.println(conta);
 		}
 	}
 
 	public void verExtrato() {
-		if (verificarContaExistente()) {
-			System.out.println("--------------------------------\n"
-					+ "           EXTRATO");
+		if (verificarContaExistente(3)) {
+			System.out.println("--------------------------------\n" + "           EXTRATO");
 			transacoes = transacaoDados.carregarExtrato(conta.getId());
 			transacoes.forEach(System.out::print);
 		}
 	}
 
 	public void verSaldo() {
-		if (verificarContaExistente()) {
+		if (verificarContaExistente(4)) {
 			double saldo = contaDados.meuSaldo(cliente.getId());
+			DecimalFormat formatar = new DecimalFormat("#,##0.00");
+			String saldoFormatado = formatar.format(saldo);
 			System.out.println("--------------------------------");
-			System.out.println("Saldo: " + String.format("R$ %.2f", saldo));
+			System.out.println("Saldo: " + saldoFormatado);
 		}
 	}
 
 	public void depositar() {
-		if (verificarContaExistente()) {
+		if (verificarContaExistente(5)) {
 			System.out.println("Informe o valor do depósito que deseja fazer: ");
 			String valorStr = entrada.nextLine();
 
@@ -128,10 +139,13 @@ public class MenuPrincipal {
 					return;
 				}
 
+				DecimalFormat formatar = new DecimalFormat("#,##0.00");
+				String depositoFormatado = formatar.format(valor);
+
 				contaDados.depositar(conta.getId(), valor);
 				Transacao transacao = new Transacao("Depósito", valor, conta.getId());
 				transacaoDados.salvarTransacao(transacao);
-				System.out.println("Depósito no valor de " + valor + " realizado!");
+				System.out.println("Depósito no valor de " + depositoFormatado + " realizado!");
 
 			} catch (NumberFormatException e) {
 				System.out.println("Insira somente números!");
@@ -140,7 +154,7 @@ public class MenuPrincipal {
 	}
 
 	public void sacar() {
-		if (verificarContaExistente()) {
+		if (verificarContaExistente(6)) {
 			System.out.println("Informe o valor do saque que deseja fazer: ");
 			String valorStr = entrada.nextLine();
 
@@ -169,13 +183,19 @@ public class MenuPrincipal {
 		}
 	}
 
-	private boolean verificarContaExistente() {
+	private boolean verificarContaExistente(int opcao) {
 		conta = contaDados.minhasInformacoes(cliente.getId());
-		if (conta == null) {
+		if (conta == null && opcao > 1) {
 			System.out.println("Você não possui uma conta ainda!");
+			return false;
+		} else if (conta != null && opcao == 1) {
 			return false;
 		}
 		return true;
+	}
+	
+	public void linhas() {
+		System.out.println("--------------------------------");
 	}
 
 }

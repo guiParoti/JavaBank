@@ -21,16 +21,19 @@ public class MenuCriarCadastro {
 		while (true) {
 			System.out.print("Insira seu nome: ");
 			String nomeCli = entrada.nextLine();
+			linhas();
 
 			if (validarNome(nomeCli)) {
 
 				System.out.print("Insira seu CPF: ");
 				String cpfCli = entrada.nextLine();
+				linhas();
 
 				if (validarCpf(cpfCli)) {
 					
 					System.out.print("Insira seu email: ");
 					String emailCli = entrada.nextLine();
+					linhas();
 
 					if (validarEmail(emailCli)) {
 
@@ -39,11 +42,13 @@ public class MenuCriarCadastro {
 
 						System.out.print("Confirme a senha: ");
 						String senhaCliConf = entrada.nextLine();
+						linhas();
 
 						if (senhaCliConf.equals(senhaCli)) {
 							Cliente cliente = new Cliente(nomeCli, cpfCli, emailCli, senhaCliConf);
 							tabelaCliente.salvar(cliente);
-							System.out.println("Conta criada com sucesso!");
+							System.out.println("Cadastro criado com sucesso!");
+							new MenuLogin().verificarLogin();;
 							break;
 						} else {
 							System.out.println("As senhas não batem!");
@@ -85,6 +90,10 @@ public class MenuCriarCadastro {
 		}
 		System.out.println("Email inválido!");
 		return false;
+	}
+	
+	public void linhas() {
+		System.out.println("--------------------------------");
 	}
 
 }

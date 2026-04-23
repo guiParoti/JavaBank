@@ -1,6 +1,7 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Conta {
 	
@@ -18,7 +19,8 @@ public class Conta {
 		this.numeroConta = numeroConta;
 		this.saldo = saldo;
 		this.tipoConta = tipoConta;
-		this.dataAbertura = LocalDate.now().toString();
+		DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		this.dataAbertura = LocalDate.now().format(dataFormatada);
 		this.idCliente = idCliente;
 	}
 	

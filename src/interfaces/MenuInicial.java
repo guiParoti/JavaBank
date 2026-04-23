@@ -36,7 +36,7 @@ public class MenuInicial {
 
 				case 0:
 					System.out.println("Até mais!");
-					return;
+					System.exit(0);
 
 				default:
 					System.out.println("Insira um número de 0 a 3!");

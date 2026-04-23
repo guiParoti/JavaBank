@@ -1,6 +1,7 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Cliente {
 	
@@ -11,13 +12,14 @@ public class Cliente {
 	private String senha;
 	private String dataCadastro;
 	
-	
 	public Cliente(String nome, String cpf, String email, String senha) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
-		this.dataCadastro = LocalDate.now().toString();
+		DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		this.dataCadastro = LocalDate.now().format(dataFormatada);
+	
 	}
 	
 	public Cliente(int id, String nome, String cpf, String email, String senha, String dataCadastro) {
